@@ -168,7 +168,6 @@
           key: settings.youtube_key
         },
         success: function(data) {   
-console.log(data);
           var subscribers = parseInt(data.items[0].statistics.subscriberCount);
           var k = kFormatter(subscribers);
           $(target + ' .item.youtube .count').append(k); 
