@@ -1,5 +1,6 @@
 (function($) {
   $.fn.SocialCounter = function(options) {
+    target = this[0].id;
     var settings = $.extend({
       // These are the defaults.
       twitter_user:'',
@@ -44,8 +45,8 @@
         success: function(data) {   
           var followers = parseInt(data.data.user.follower_count);
           var k = kFormatter(followers);
-          $('#wrapper .item.pinterest .count').append(k); 
-          $('#wrapper .item.pinterest').attr('href','https://pinterest.com/'+settings.pinterest_user);
+          $(target + ' .item.pinterest .count').append(k); 
+          $(target + ' .item.pinterest').attr('href','https://pinterest.com/'+settings.pinterest_user);
           getTotal(followers); 
         } 
       }); 
@@ -62,8 +63,8 @@
         success: function(data) {   
           var followers = parseInt(data.followers_count);
           var k = kFormatter(followers);
-          $('#wrapper .item.dribbble .count').append(k); 
-          $('#wrapper .item.dribbble').attr('href','https://dribbble.com/'+settings.dribbble_user);
+          $(target + ' .item.dribbble .count').append(k); 
+          $(target + ' .item.dribbble').attr('href','https://dribbble.com/'+settings.dribbble_user);
           getTotal(followers); 
         } 
       }); 
@@ -84,8 +85,8 @@
         success: function(data) {   
           var followers = parseInt(data.fan_count);
           var k = kFormatter(followers);
-          $('#wrapper .item.facebook .count').append(k); 
-          $('#wrapper .item.facebook').attr('href','https://facebook.com/'+settings.facebook_user);
+          $(target + ' .item.facebook .count').append(k); 
+          $(target + ' .item.facebook').attr('href','https://facebook.com/'+settings.facebook_user);
           getTotal(followers); 
         } 
       }); 
@@ -101,8 +102,8 @@
         success: function(data) {
           var followers = parseInt(data.data.counts.followed_by);
           var k = kFormatter(followers);
-          $('#wrapper .item.instagram .count').append(k);
-          $('#wrapper .item.instagram').attr('href','https://instagram.com/'+settings.instagram_user);
+          $(target + ' .item.instagram .count').append(k);
+          $(target + ' .item.instagram').attr('href','https://instagram.com/'+settings.instagram_user);
           getTotal(followers); 
         }
       });
@@ -128,8 +129,8 @@
                  success: function(data) {
                    var followers = parseInt(data.data.counts.followed_by);
                    var k = kFormatter(followers);
-                   $('#wrapper .instagram_sandbox .count').append(k);
-                   $('#wrapper .item.instagram_sandbox').attr('href','https://instagram.com/'+settings.instagram_user_sandbox);
+                   $(target + ' .instagram_sandbox .count').append(k);
+                   $(target + ' .item.instagram_sandbox').attr('href','https://instagram.com/'+settings.instagram_user_sandbox);
                    getTotal(followers); 
                  }
                });
@@ -150,8 +151,8 @@
         success: function (data) {
           var followers = parseInt(data.circledByCount);
           var k = kFormatter(followers);
-          $("#wrapper .item.google .count").append(k);
-          $('#wrapper .item.google').attr('href','https://plus.google.com/'+settings.google_plus_id);
+          $(target + ' .item.google .count').append(k);
+          $(target + ' .item.google').attr('href','https://plus.google.com/'+settings.google_plus_id);
           getTotal(followers); 
         }
       });
@@ -169,8 +170,8 @@
         success: function(data) {   
           var subscribers = parseInt(data.items[0].statistics.subscriberCount);
           var k = kFormatter(subscribers);
-          $('#wrapper .item.youtube .count').append(k); 
-          $('#wrapper .item.youtube').attr('href','https://youtube.com/'+settings.youtube_user);
+          $(target + ' .item.youtube .count').append(k); 
+          $(target + ' .item.youtube').attr('href','https://youtube.com/'+settings.youtube_user);
           getTotal(subscribers); 
         } 
       }); 
@@ -188,8 +189,8 @@
         success: function(data) {   
           var subscribers = parseInt(data.items[0].statistics.subscriberCount);
           var k = kFormatter(subscribers);
-          $('#wrapper .item.youtube_square .count').append(k); 
-          $('#wrapper .item.youtube_square').attr('href','https://youtube.com/'+settings.youtube_user_square);
+          $(target + ' .item.youtube_square .count').append(k); 
+          $(target + ' .item.youtube_square').attr('href','https://youtube.com/'+settings.youtube_user_square);
           getTotal(subscribers); 
         } 
       }); 
@@ -206,8 +207,8 @@
         success: function(data) {   
           var followers = parseInt(data.followers_count);
           var k = kFormatter(followers);
-          $('#wrapper .item.soundcloud .count').append(k); 
-          $('#wrapper .item.soundcloud').attr('href',data.permalink_url);
+          $(target + ' .item.soundcloud .count').append(k); 
+          $(target + ' .item.soundcloud').attr('href',data.permalink_url);
           getTotal(followers); 
         } 
       }); 
@@ -223,8 +224,8 @@
         },
         success: function(data) {   
           var followers = parseInt(data.total);
-          $('#wrapper .item.vimeo .count').append(followers).digits(); 
-          $('#wrapper .item.vimeo').attr('href','https://vimeo.com/'+settings.vimeo_user);
+          $(target + ' .item.vimeo .count').append(followers).digits(); 
+          $(target + ' .item.vimeo').attr('href','https://vimeo.com/'+settings.vimeo_user);
           getTotal(followers); 
         } 
       }); 
@@ -239,8 +240,8 @@
         },
         success: function(data) {   
           var followers = parseInt(data.followers);
-          $('#wrapper .item.twitter .count').append(followers).digits(); 
-          $('#wrapper .item.twitter').attr('href','https://twitter.com/'+settings.twitter_user);
+          $(target + ' .item.twitter .count').append(followers).digits(); 
+          $(target + ' .item.twitter').attr('href','https://twitter.com/'+settings.twitter_user);
           getTotal(followers); 
         } 
       }); 
@@ -254,8 +255,8 @@
         success: function(data) {   
           var followers = parseInt(data.followers);
           var k = kFormatter(followers);
-          $('#wrapper .item.github .count').append(k); 
-          $('#wrapper .item.github').attr('href','https://github.com/'+settings.github_user);
+          $(target + ' .item.github .count').append(k); 
+          $(target + ' .item.github').attr('href','https://github.com/'+settings.github_user);
           getTotal(followers); 
         } 
       }); 
@@ -272,8 +273,8 @@
         success: function(data) {   
           var followers = parseInt(data.user.stats.followers);
           var k = kFormatter(followers);
-          $('#wrapper .item.behance .count').append(k); 
-          $('#wrapper .item.behance').attr('href','https://behance.net/'+settings.behance_user);
+          $(target + ' .item.behance .count').append(k); 
+          $(target + ' .item.behance').attr('href','https://behance.net/'+settings.behance_user);
           getTotal(followers); 
         } 
       }); 
@@ -289,8 +290,8 @@
         success: function(data) {
           var followers = parseInt(data.followers);
           var k = kFormatter(followers);
-          $('#wrapper .item.vine .count').append(k); 
-          $('#wrapper .item.vine').attr('href','https://vine.co/u/'+settings.vine_user);
+          $(target + ' .item.vine .count').append(k); 
+          $(target + ' .item.vine').attr('href','https://vine.co/u/'+settings.vine_user);
           getTotal(followers); 
         } 
       });
@@ -307,8 +308,8 @@
         success: function(data) {
           var followers = parseInt(data.response.count);
           var k = kFormatter(followers);
-          $('#wrapper .item.vk .count').append(k); 
-          $('#wrapper .item.vk').attr('href','https://vk.com/id'+settings.vk_id);
+          $(target + ' .item.vk .count').append(k); 
+          $(target + ' .item.vk').attr('href','https://vk.com/id'+settings.vk_id);
           getTotal(followers); 
         } 
       });
@@ -339,8 +340,8 @@
             success: function(data) {    
               var followers = parseInt(data.response.user.friends.count);
               var k = kFormatter(followers);
-              $('#wrapper .item.foursquare .count').append(k); 
-              $('#wrapper .item.foursquare').attr('href','https://foursquare.com/'+settings.foursquare_user);
+              $(target + ' .item.foursquare .count').append(k); 
+              $(target + ' .item.foursquare').attr('href','https://foursquare.com/'+settings.foursquare_user);
               getTotal(followers); 
             } 
           });
@@ -359,8 +360,8 @@
         success: function(data){
           var connections = parseInt(data.numConnections);
           var k = kFormatter(connections);
-          $('#wrapper .item.linkedin .count').append(k); 
-          $('#wrapper .item.linkedin').attr('href',data.publicProfileUrl);
+          $(target + ' .item.linkedin .count').append(k); 
+          $(target + ' .item.linkedin').attr('href',data.publicProfileUrl);
           getTotal(connections); 
         }
       });
@@ -376,8 +377,8 @@
         success: function(data) {
           var followers = parseInt(data.followers);
           var k = kFormatter(followers);
-          $('#wrapper .item.tumblr .count').append(k); 
-          $('#wrapper .item.tumblr').attr('href','https://'+settings.tumblr_username+'.tumblr.com');
+          $(target + ' .item.tumblr .count').append(k); 
+          $(target + ' .item.tumblr').attr('href','https://'+settings.tumblr_username+'.tumblr.com');
           getTotal(followers); 
         } 
       });
@@ -393,8 +394,8 @@
         success: function(data) {
           var followers = parseInt(data.followers);
           var k = kFormatter(followers);
-          $('#wrapper .item.twitch .count').append(k); 
-          $('#wrapper .item.twitch').attr('href','https://www.twitch.tv/'+settings.twitch_username+'/profile');
+          $(target + ' .item.twitch .count').append(k); 
+          $(target + ' .item.twitch').attr('href','https://www.twitch.tv/'+settings.twitch_username+'/profile');
           getTotal(followers); 
         } 
       });
@@ -407,8 +408,8 @@
             success: function(data){
               var followers = parseInt(data.followers.total);
               var k = mFormatter(followers);
-              $('#wrapper .item.spotify_artist .count').append(k); 
-              $('#wrapper .item.spotify_artist').attr('href','https://open.spotify.com/artist/'+settings.spotify_artist_id);
+              $(target + ' .item.spotify_artist .count').append(k); 
+              $(target + ' .item.spotify_artist').attr('href','https://open.spotify.com/artist/'+settings.spotify_artist_id);
               getTotal(followers);    
             }
         });
@@ -421,8 +422,8 @@
             success: function(data){
               var followers = parseInt(data.followers.total);
               var k = mFormatter(followers);
-              $('#wrapper .item.spotify_user .count').append(k); 
-              $('#wrapper .item.spotify_user').attr('href','https://open.spotify.com/users/'+settings.spotify_user_id);
+              $(target + ' .item.spotify_user .count').append(k); 
+              $(target + ' .item.spotify_user').attr('href','https://open.spotify.com/users/'+settings.spotify_user_id);
               getTotal(followers);    
             }
         });
@@ -451,7 +452,7 @@
     }
 
     function linkClick(){
-      $('#wrapper .item').attr('target','_blank');
+      $(target + ' .item').attr('target','_blank');
     }
     linkClick();
 
