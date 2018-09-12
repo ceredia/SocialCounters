@@ -1,6 +1,6 @@
 (function($) {
   $.fn.SocialCounter = function(options) {
-    target = this[0].id;
+    this.target = '#' + this[0].id;
     var settings = $.extend({
       // These are the defaults.
       twitter_user:'',
@@ -36,13 +36,13 @@
       spotify_user_id:''
     }, options);
 
-    function pinterest(){
+    function pinterest(target){
       //Pinterst API V3
       $.ajax({
         url: 'https://api.pinterest.com/v3/pidgets/users/'+settings.pinterest_user+'/pins',
         dataType: 'jsonp',
         type: 'GET',
-        success: function(data) {   
+        success: function(data) {
           var followers = parseInt(data.data.user.follower_count);
           var k = kFormatter(followers);
           $(target + ' .item.pinterest .count').append(k); 
@@ -51,7 +51,7 @@
         } 
       }); 
     }
-    function dribbble(){
+    function dribbble(target){
       //Dribble API
       $.ajax({
         url: 'https://api.dribbble.com/v1/users/'+settings.dribbble_user,
@@ -69,7 +69,7 @@
         } 
       }); 
     }
-    function facebook(){
+    function facebook(target){
       //Facebook API
       //60 Day Access Token - Regenerate a new one after two months
       //https://neosmart-stream.de/facebook/how-to-create-a-facebook-access-token/
@@ -91,7 +91,7 @@
         } 
       }); 
     }
-    function instagram(){
+    function instagram(target){
       $.ajax({
         url: 'https://api.instagram.com/v1/users/self/',
         dataType: 'jsonp',
@@ -108,7 +108,7 @@
         }
       });
     }
-    function instagram_sandbox(){
+    function instagram_sandbox(target){
        $.ajax({
          url: 'https://api.instagram.com/v1/users/search?q='+settings.instagram_user_sandbox,
          dataType: 'jsonp',
@@ -139,7 +139,7 @@
          }
        });
      }
-    function google(){
+    function google(target){
       //Google+ API
       $.ajax({
         url: 'https://www.googleapis.com/plus/v1/people/' + settings.google_plus_id,
@@ -157,7 +157,7 @@
         }
       });
     }
-    function youtube(){
+    function youtube(target){
       $.ajax({
         url: 'https://www.googleapis.com/youtube/v3/channels',
         dataType: 'jsonp',
@@ -168,6 +168,7 @@
           key: settings.youtube_key
         },
         success: function(data) {   
+console.log(data);
           var subscribers = parseInt(data.items[0].statistics.subscriberCount);
           var k = kFormatter(subscribers);
           $(target + ' .item.youtube .count').append(k); 
@@ -176,7 +177,7 @@
         } 
       }); 
     }
-    function youtubeSquare(){
+    function youtubeSquare(target){
       $.ajax({
         url: 'https://www.googleapis.com/youtube/v3/channels',
         dataType: 'jsonp',
@@ -195,7 +196,7 @@
         } 
       }); 
     }
-    function soundcloud(){
+    function soundcloud(target){
       //SoundCloud API
       $.ajax({
         url: 'http://api.soundcloud.com/users/'+settings.soundcloud_user_id,
@@ -213,7 +214,7 @@
         } 
       }); 
     }
-    function vimeo(){
+    function vimeo(target){
       //Vimeo V3 API
       $.ajax({
         url: 'https://api.vimeo.com/users/'+settings.vimeo_user+'/followers',
@@ -230,7 +231,7 @@
         } 
       }); 
     }
-    function twitter(){
+    function twitter(target){
       $.ajax({
         url: '../SocialCounters/twitter/index.php',
         dataType: 'json',
@@ -246,7 +247,7 @@
         } 
       }); 
     }
-    function github(){
+    function github(target){
       //Github
       $.ajax({
         url: 'https://api.github.com/users/'+settings.github_user,
@@ -261,7 +262,7 @@
         } 
       }); 
     }
-    function behance(){
+    function behance(target){
       //Behance
       $.ajax({
         url: 'https://api.behance.net/v2/users/'+settings.behance_user,
@@ -279,7 +280,7 @@
         } 
       }); 
     }
-    function vine(){
+    function vine(target){
       $.ajax({
         url: '../SocialCounters/vine/vine.php',
         dataType: 'json',
@@ -296,7 +297,7 @@
         } 
       });
     }
-    function vk(){
+    function vk(target){
       //VK API
       $.ajax({
         url: 'https://api.vk.com/method/users.getFollowers',
@@ -314,7 +315,7 @@
         } 
       });
     }
-    function foursquare(){
+    function foursquare(target){
       //Foursquare API - GET ID
       $.ajax({
         url: 'https://api.foursquare.com/v2/users/search',
@@ -348,7 +349,7 @@
         } 
       });
     }
-    function linkedin(){
+    function linkedin(target){
       $.ajax({
         url: 'https://api.linkedin.com/v1/people/~:(num-connections,public-profile-url)',
         dataType:'jsonp',
@@ -366,7 +367,7 @@
         }
       });
     }
-    function tumblr(){
+    function tumblr(target){
       $.ajax({
         url: '../SocialCounters/tumblr/callback.php',
         dataType: 'json',
@@ -383,7 +384,7 @@
         } 
       });
     }
-    function twitch(){
+    function twitch(target){
       $.ajax({
         url: 'https://api.twitch.tv/kraken/channels/'+settings.twitch_username,
         dataType: 'json',
@@ -400,7 +401,7 @@
         } 
       });
     }
-    function spotifyArtist(){
+    function spotifyArtist(target){
         $.ajax({
             url:'https://api.spotify.com/v1/artists/'+settings.spotify_artist_id,
             dataType:'json',
@@ -414,7 +415,7 @@
             }
         });
     }
-    function spotifyUser(){
+    function spotifyUser(target){
         $.ajax({
             url:'https://api.spotify.com/v1/users/'+settings.spotify_user_id,
             dataType:'json',
@@ -451,54 +452,54 @@
       $("#total_k").html(kFormatter(total));
     }
 
-    function linkClick(){
+    function linkClick(target){
       $(target + ' .item').attr('target','_blank');
     }
-    linkClick();
+    linkClick(this.target);
 
     //Call Functions
     if(settings.twitter_user!=''){ 
-      twitter(); 
+      twitter(this.target); 
     } if(settings.facebook_user!='' && settings.facebook_token!=''){ 
-      facebook(); 
+      facebook(this.target); 
     } if(settings.instagram_user!='' && settings.instagram_token!=''){ 
-      instagram();
+      instagram(this.target);
     } if(settings.instagram_user_sandbox!='' && settings.instagram_token!=''){ 
-      instagram_sandbox();
+      instagram_sandbox(this.target);
     }if(settings.google_plus_id!='' && settings.google_plus_key!=''){ 
-      google();
+      google(this.target);
     } if(settings.linkedin_oauth!=''){ 
-      linkedin(); 
+      linkedin(this.target); 
     } if(settings.youtube_user!='' && settings.youtube_key!=''){ 
-      youtube(); 
+      youtube(this.target); 
     } if(settings.youtube_user_square!='' && settings.youtube_key!=''){ 
-      youtubeSquare(); 
+      youtubeSquare(this.target); 
     } if(settings.vine_user!=''){ 
-      vine(); 
+      vine(this.target); 
     } if(settings.pinterest_user!=''){ 
-      pinterest(); 
+      pinterest(this.target); 
     } if(settings.dribbble_user!='' && settings.dribbble_token!=''){ 
-      dribbble();
+      dribbble(this.target);
     } if(settings.soundcloud_user_id!='' && settings.soundcloud_client_id!=''){ 
-      soundcloud(); 
+      soundcloud(this.target); 
     } if(settings.vimeo_user!='' && settings.vimeo_token!=''){ 
-      vimeo();
+      vimeo(this.target);
     } if(settings.github_user!=''){ 
-      github();
+      github(this.target);
     } if(settings.behance_user!='' && settings.behance_client_id!=''){ 
-      behance(); 
+      behance(this.target); 
     } if(settings.vk_id!=''){ 
-      vk(); 
+      vk(this.target); 
     } if(settings.foursquare_user!='' && settings.foursquare_token!=''){ 
-      foursquare(); 
+      foursquare(this.target); 
     } if(settings.tumblr_username!=''){ 
-      tumblr(); 
+      tumblr(this.target); 
     } if(settings.twitch_username!='' && settings.twitch_client_id!=''){ 
-      twitch(); 
+      twitch(this.target); 
     } if(settings.spotify_artist_id!=''){ 
-      spotifyArtist(); 
+      spotifyArtist(this.target); 
     }if(settings.spotify_user_id!=''){ 
-      spotifyUser(); 
+      spotifyUser(this.target); 
     }
   };
 }(jQuery));
